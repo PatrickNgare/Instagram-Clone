@@ -1,3 +1,73 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+#model profile to store user profile
+class Profile(models.Model):
+    profile_photo=models.ImageField(upload_to='avatars/',blank=True,null=True)
+    bio=models.TextField(max_length=250)
+    user=models.CharField(User,max_length=60)
+
+    def __str__(self):
+        return self.first_name
+
+    def save_profile(self):
+        
+        self.save()    
+    
+#image models to store image data   
+class Image(models.Model):
+    image=models.ImageField(upload_to='gallery/',blank=True,null=True)
+    image_name=models.CharField(max_length=60)
+    image_caption=models.CharField(max_length=200)
+    profile=models.ForeignKey(Profile,null=True)
+    likes=models.IntegerField(default=0)
+    postdate=models.DateTimeField(auto_now_add=True,null=True)
+    
+    class Meta:
+        ordering=['image']
+
+    def __str__(self):
+        
+        return self.image
+
+    def save_image(self):
+        
+        self.save()   
+
+    @classmethod
+    def get_image_by_id(cls,image_id):
+        
+        images=cls.objects.get(id=image_id)
+
+        return images 
+
+    @classmethod
+    def search_by_user(cls,search_term):
+        
+        images=cls.objects.filter(image_icontains=search_term)
+        return images
+
+
+    @classmethod
+    def delete_image():    
+       pass
+
+
+    @classmethod
+    def update_caption():   
+       pass
+
+#comment model to store comments data 
+class Comment(models.Model):
+    
+    comment=models.TextField(max_length=300)
+    user=models.CharField(User,max_length=60)
+    image=models.ForeignKey(Image,null=True)
+    timecomment=models.DateTimeField(auto_now_add=True,null=True)
+     
+
+    class Meta:
+        ordering=['comment']
+
+    def __str__(self):
+        return self.comment
