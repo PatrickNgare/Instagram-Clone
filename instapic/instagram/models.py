@@ -11,7 +11,14 @@ class Profile(models.Model):
 
     def save_profile(self):
         
-        self.save()    
+        self.save() 
+    @classmethod
+    def get_profile(cls):
+        
+        profile=Profile.objects.all()
+
+        return profile
+               
     
 #image models to store image data   
 class Image(models.Model):
