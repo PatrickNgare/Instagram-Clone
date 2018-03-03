@@ -4,7 +4,9 @@ from .models import Image,Profile,Comment
 
 def index(request):
     
-    updates=Image.get_image_by_id()
+    # update=Image.objects.order_by('-postdate')
+    update=Image.objects.all()
+    print(update)
     
 
-    return render(request,'all-temps/index.html',{"updates":updates})
+    return render(request,'all-temps/index.html',{"update":update})
