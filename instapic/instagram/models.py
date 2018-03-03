@@ -5,10 +5,9 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     profile_photo=models.ImageField(upload_to='avatars/',blank=True,null=True)
     bio=models.TextField(max_length=250)
-    user=models.CharField(User,max_length=60)
+    user=models.ForeignKey(User)
+    update_time = models.DateTimeField(auto_now_add=True, null=True)
 
-    def __str__(self):
-        return self.first_name
 
     def save_profile(self):
         
@@ -19,16 +18,13 @@ class Image(models.Model):
     image=models.ImageField(upload_to='gallery/',blank=True,null=True)
     image_name=models.CharField(max_length=60)
     image_caption=models.CharField(max_length=200)
-    profile=models.ForeignKey(Profile,null=True)
+    profile=models.ForeignKey(Profile,null=True,blank=True)
     likes=models.IntegerField(default=0)
     postdate=models.DateTimeField(auto_now_add=True,null=True)
     
     class Meta:
         ordering=['image']
 
-    def __str__(self):
-        
-        return self.image
 
     def save_image(self):
         
@@ -68,6 +64,3 @@ class Comment(models.Model):
 
     class Meta:
         ordering=['comment']
-
-    def __str__(self):
-        return self.comment
