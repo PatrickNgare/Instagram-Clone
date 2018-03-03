@@ -10,3 +10,10 @@ def index(request):
     
 
     return render(request,'all-temps/index.html',{"update":update})
+
+
+def profile(request):
+
+    profile=Profile.get_profile()   
+
+    return render(request,'all-temps/profile.html',{"profile":profile}) 
