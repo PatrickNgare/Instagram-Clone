@@ -1,0 +1,18 @@
+{% extends 'all-temps/base.html' %}
+{% block content %}
+{{block.super}}
+    <div class="container">
+    {% for prof in profile %}
+        <div class="row">
+            <div class="col-md-3 col-sm-2">
+                {% if prof.profile_photo %}
+                    <img src="{{prof.profile_photo.url}}" alt="" class="rounded-circle" height="150px" width="150px">
+                {% else %}
+                    <img src="https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman2-512.png" alt="stat" class="rounded-circle"/>
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+    </div>
+{% endblock %}
