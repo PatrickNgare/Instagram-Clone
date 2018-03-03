@@ -7,4 +7,4 @@ def index(request):
     updates=Image.get_image_by_id()
     
 
-    return render(request,'all-temps/index.html'{"updates":updates})
+    return render(request,'all-temps/index.html',{"updates":updates})
