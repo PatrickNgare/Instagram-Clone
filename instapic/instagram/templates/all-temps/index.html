@@ -2,7 +2,43 @@
 
 {% block content %}
 {{block.super}}
+{% for up in update %}
+<div class="Instagram-card">
+    <div class="Instagram-card-header">
+      <img src="https://scontent-mia1-2.cdninstagram.com/t51.2885-19/11351720_883119395071375_1326111195_a.jpg"class="Instagram-card-user-image">
+      <a class="Instagram-card-user-name" href="https://www.instagram.com/rogersbase/"> Patrick Ngare </a>
+      <div class="Instagram-card-time"> 1 sem </div>
+    </div>
 
-<p>Hello instagram</p>
+    <div class="Instagram-card-image">
+        {% if up.image %}
+      <img src= "{{up.image.url}}" height=400px/>
+      {% endif %}
+    </div>
+
+    <div class="Instagram-card-content">
+      <p class="Likes">640 Me gusta</p>
+      <p><a class="Instagram-card-content-user">
+      <href="https://www.instagram.com/rogersbase/">peter</a>  {{up.image_caption}} 🎉</p>
+      <p class="comments">Veiw 12 coments</p>
+      <br><a class="user-comment" href="https://www.instagram.com/chrisobrien64/">chrisob</a> NO way men just do </br>
+      <br><a class="user-comment" href="https://www.instagram.com/artie_mcparty/">patel</a> Aweome buddy.</br>
+      <br><a class="user-comment" href="https://www.instagram.com/theealeexj/">jemo</a> I just like it men</br>
+    <hr>
+    </div>  
+
+    <div class="Instagram-card-footer">
+      <a class="footer-action-icons"href="#"><i class="fa fa-heart-o"></i></a>
+      <input class="comments-input" type="text" placeholder="add coments.."/>
+      <a class="footer-action-icons"href="#"><i class="fa fa-ellipsis-h"></i></a>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+
+
+
 
 {% endblock %}
