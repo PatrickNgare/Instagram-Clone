@@ -15,7 +15,7 @@ class Profile(models.Model):
     
 #image models to store image data   
 class Image(models.Model):
-    image=models.ImageField(upload_to='gallery/',blank=True,null=True)
+    image=models.ImageField(upload_to= 'gallery/',blank=True,null=True)
     image_name=models.CharField(max_length=60)
     image_caption=models.CharField(max_length=200)
     profile=models.ForeignKey(Profile,null=True,blank=True)
@@ -25,6 +25,11 @@ class Image(models.Model):
     class Meta:
         ordering=['image']
 
+    @classmethod
+    def my_images(cls):
+        
+        images = cls.objects.all()
+        return images
 
     def save_image(self):
         
