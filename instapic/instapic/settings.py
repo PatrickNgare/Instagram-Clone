@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'instapic.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta',
+        'NAME': 'instapic',
         'USER': 'patel',
-    'PASSWORD':'12345',
-    }
+        'PASSWORD':'12345',
+    }   
 }
 
 # Password validation
