@@ -1,23 +1,25 @@
-{%extends 'all-temps/base.html'%}
+{% extends "all-temps/base.html" %}
+{% load static %}
 
 {% block content %}
-{{block.super}}
+{{ block.super }}
 {% for up in update %}
 <div class="Instagram-card">
     <div class="Instagram-card-header">
-      <img src="https://scontent-mia1-2.cdninstagram.com/t51.2885-19/11351720_883119395071375_1326111195_a.jpg"class="Instagram-card-user-image">
-      <a class="Instagram-card-user-name" href="https://www.instagram.com/rogersbase/"> Patrick Ngare </a>
-      <div class="Instagram-card-time"> 1 sem </div>
+      <img src="{{up.image.url}}"class="Instagram-card-user-image">
+      <a class="Instagram-card-user-name" href="#">{{up.user}}</a>
+      <div class="Instagram-card-time"> {{up.postdate|date|time}}</div>
     </div>
-
+    
+   
     <div class="Instagram-card-image">
         {% if up.image %}
       <img src= "{{up.image.url}}" height="400px" width="600px"/>
       {% endif %}
     </div>
-
+     
     <div class="Instagram-card-content">
-      <p class="Likes">640 Me gusta</p>
+      <p class="Likes">{{up.likes }} likes</p>
       <p><a class="Instagram-card-content-user">
       <href="https://www.instagram.com/rogersbase/">peter</a>  {{up.image_caption}} 🎉</p>
       <p class="comments">Veiw 12 coments</p>
