@@ -28,6 +28,8 @@ class Image(models.Model):
     profile=models.ForeignKey(Profile,null=True,blank=True)
     likes=models.IntegerField(default=0)
     postdate=models.DateTimeField(auto_now_add=True,null=True)
+    user = models.ForeignKey(User, null=True)
+
     
     class Meta:
         ordering=['image']
