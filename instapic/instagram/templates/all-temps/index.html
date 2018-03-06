@@ -4,11 +4,12 @@
 {% block content %}
 {{ block.super }}
 {% for up in update %}
+
 <div class="Instagram-card">
     <div class="Instagram-card-header">
       <img src="{{up.image.url}}"class="Instagram-card-user-image">
-      <a class="Instagram-card-user-name" href="#">{{up.user}}</a>
-      <div class="Instagram-card-time"> {{up.postdate|date|time}}</div>
+      <a class="Instagram-card-user-name" href="{% url 'userprofiles' user.id%}">{{up.user}}</a>
+     
     </div>
     
    
@@ -21,12 +22,16 @@
     <div class="Instagram-card-content">
       <p class="Likes">{{up.likes }} likes</p>
       <p><a class="Instagram-card-content-user">
-      <href="https://www.instagram.com/rogersbase/">peter</a>  {{up.image_caption}} 🎉</p>
-      <p class="comments">Veiw 12 coments</p>
-      <br><a class="user-comment" href="https://www.instagram.com/chrisobrien64/">chrisob</a> NO way men just do </br>
-      <br><a class="user-comment" href="https://www.instagram.com/artie_mcparty/">patel</a> Aweome buddy.</br>
-      <br><a class="user-comment" href="https://www.instagram.com/theealeexj/">jemo</a> I just like it men</br>
+        
+      <href="#">{{up.user}}</a>  {{up.image_caption}} 🎉</p>
+      <p> {{up.postdate|timesince }} ago</p>
+      <p class="comments">View 12 comments</p>
+
+      <br><a class="user-comment" href="#">{{up.user.username}}</a> {{up.comment}} </br>
+      <br><a class="user-comment" href="#">{{up.user.username}}</a> {{up.comment}}</br>
+      <br><a class="user-comment" href="#">{{up.user.username}}</a> {{up.comment}}</br>
     <hr>
+    
     </div>  
 
     <div class="Instagram-card-footer">
@@ -35,10 +40,11 @@
       <a class="footer-action-icons"href="#"><i class="fa fa-ellipsis-h"></i></a>
     </div>
     {% endfor %}
+    
   </div>
 
 
-
+  
 
 
 

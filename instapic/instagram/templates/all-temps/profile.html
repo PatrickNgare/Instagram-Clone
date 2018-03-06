@@ -1,18 +1,33 @@
+
+
 {% extends 'all-temps/base.html' %}
+{% load static %}
+
+
+<!-- <link rel="stylesheet" href="{% static 'css/profilez.css' %}"> -->
+
 {% block content %}
 {{block.super}}
-    <div class="container">
-    {% for prof in profile %}
-        <div class="row">
-            <div class="col-md-3 col-sm-2">
-                {% if prof.profile_photo %}
-                    <img src="{{prof.profile_photo.url}}" alt="" class="rounded-circle" height="150px" width="150px">
-                {% else %}
-                    <img src="https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman2-512.png" alt="stat" class="rounded-circle"/>
-                {% endif %}
-            </div>
-        </div>
-        <hr>
-    {% endfor %}
+
+{% for prof in profile %}
+<div class="card testimonial-card">
+    <div class="card-up indigo lighten-1">
     </div>
+    {% if prof.profile_photo %}
+    <div class="avatar mx-auto white"><img src="{{prof.profile_photo.url}}" height="150px" width="150px" class="rounded-circle">
+        {% else %}
+        <img src="https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman2-512.png" alt="stat" class="rounded-circle"/>
+    {% endif %}
+    </div>
+    <div class="card-body">
+       
+        <h4 class="card-title">{{prof.user}}</h4>
+        <h5 class="card-text">{{prof.bio}}</h5>
+        
+        <button type="button" class="btn btn-primary">Follow</button>
+      
+
+</div>
+{% endfor %}
 {% endblock %}
+   
