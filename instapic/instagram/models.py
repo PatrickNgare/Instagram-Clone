@@ -18,6 +18,18 @@ class Profile(models.Model):
         profile=Profile.objects.all()
 
         return profile
+
+
+#comment model to store comments data 
+class Comment(models.Model):
+    
+    comment=models.TextField(max_length=300)
+    timecomment=models.DateTimeField(auto_now_add=True,null=True)
+     
+
+    class Meta:
+        ordering=['comment']
+        
                
     
 #image models to store image data   
@@ -29,6 +41,8 @@ class Image(models.Model):
     likes=models.IntegerField(default=0)
     postdate=models.DateTimeField(auto_now_add=True,null=True)
     user = models.ForeignKey(User, null=True)
+    comment=models.ForeignKey(Comment,null=True)
+    
 
     
     class Meta:
@@ -67,14 +81,3 @@ class Image(models.Model):
     def update_caption():   
        pass
 
-#comment model to store comments data 
-class Comment(models.Model):
-    
-    comment=models.TextField(max_length=300)
-    user=models.CharField(User,max_length=60)
-    image=models.ForeignKey(Image,null=True)
-    timecomment=models.DateTimeField(auto_now_add=True,null=True)
-     
-
-    class Meta:
-        ordering=['comment']
