@@ -6,13 +6,14 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2000px-Instagram_logo.svg.png" width=100px height=35px alt="INSTAGRAM"> </a>
   </a>
   <form class="form-inline" role="search" action="{% url 'search_results' %} ">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search user" aria-label="Search">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search user"name="profile">
     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
   </form>
    
   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-      <a href="{% url 'profile' %}" id="instTitle" style=" margin-right:10px; font-size:25px;">
-        <i class="fa fa-user-o" style="font-size:24px;color:black"></i>
+      <a href="{% url 'single_profile' %}" id="instTitle" style=" margin-right:10px; font-size:25px;">
+
+        <i class="fa fa-user-user" style="font-size:24px;color:black"></i>
       </a>
       <a href="{% url 'profile' %}" id="instTitle" style="margin-right:10px;font-size:25px;">
         <i class="fa fa-heart-o" style="font-size:24px;color:black"></i>

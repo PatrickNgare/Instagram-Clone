@@ -12,12 +12,18 @@ class Profile(models.Model):
     def save_profile(self):
         
         self.save() 
+        
     @classmethod
     def get_profile(cls):
         
         profile=Profile.objects.all()
 
         return profile
+    
+    @classmethod
+    def search_profile(cls, search_term):
+        profile = cls.objects.filter(user__username__icontains=search_term)
+        return profile    
 
 
 #comment model to store comments data 

@@ -4,9 +4,9 @@
 
   <div class="row">
     {% if profiles%}
-      <h2>Found {{ profiles|length }} of searched term {{message}}</h2>
+      <h2>Found {{message}}</h2>
     {% else %}
-      <h2> Found 0 user for the search term {{message}}</h2>
+      <h2> N0 user by name {{message}}</h2>
     {% endif %}
 
   </div>
@@ -16,7 +16,11 @@
   {% if profiles %}
     {% for profile in profiles %}
       <div class="col-sm-6 col-md-12">
-          <h1>{{profile.bio}}</h1>
+       
+          <img src="{{profile.profile_photo.url}}"class="img-reponsive" width="300px" height="300px"><br>
+          <span class="badge badge-secondary"> <p> username: {{profile.user.username}}</p></span>
+        
+        <h1>  Bio: {{profile.bio}}</h1>
       </div>
     {% endfor %}
   {% endif %}

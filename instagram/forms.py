@@ -6,7 +6,7 @@ class UploadForm(forms.ModelForm):
     
     class Meta:
         model=Image
-        exclude=['user','profile','likes']
+        exclude=['user','profile','likes','comment',]
 
 class EditProfile(forms.ModelForm):
     class Meta:

@@ -63,3 +63,9 @@ def upload(request):
 
 
 
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    current_user = request.user
+    title = 'Instagrum | Profile'
+    profiles = Profile.objects.all()
+    return render(request,'all-temps/single_profile.html',{"title":title,"profiles":profiles,"user":current_user,})

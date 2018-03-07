@@ -10,7 +10,7 @@ urlpatterns=[
     url(r'^user/(\d+)', views.user_profile, name='userprofiles'),
     url(r'^search/', views.search_results, name='search_results'),
     url('upload/',views.upload, name='upload'),
-
+     url('^profile/',views.profile, name='single_profile'),
 
 ]
 if settings.DEBUG:
