@@ -27,7 +27,7 @@ A Clone of the afamous photo sharing app Instagram
 * Upload my pictures to the application.
 * See my profile with all my pictures.
 * Follow other users and see their pictures on my timeline.
-* Like a picture and leave a comment on it.
+* Like a picture and leave a comment on it.(using facebook like and comments but taaking long to load)
 #### This project uses major technologies which are :
 * HTML5/CSS 
 * Bootstrap 4
