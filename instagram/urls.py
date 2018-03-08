@@ -7,10 +7,10 @@ urlpatterns=[
 
     url(r'^$',views.index, name='index'),
     url(r'^profile/',views.profile, name='profile'),
-    url(r'^user/(\d+)', views.user_profile, name='userprofiles'),
     url(r'^search/', views.search_results, name='search_results'),
-    url('upload/',views.upload, name='upload'),
-     url('^profile/',views.profile, name='single_profile'),
+    url(r'upload/',views.upload, name='upload'),
+    url(r'^single_profile/',views.single_profile, name='single_profile'),
+    url(r'^user/(\d+)',views.user, name='singleuser')
 
 ]
 if settings.DEBUG:
