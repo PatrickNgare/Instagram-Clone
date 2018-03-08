@@ -31,6 +31,7 @@ class Comment(models.Model):
     
     comment=models.TextField(max_length=300)
     timecomment=models.DateTimeField(auto_now_add=True,null=True)
+    user = models.ForeignKey(User, null=True)
      
 
     class Meta:
