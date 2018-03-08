@@ -23,11 +23,6 @@ def profile(request):
     return render(request,'all-temps/profile.html',{"profile":profile}) 
 
 
-@login_required(login_url='/accounts/login')
-def user_profile(request, user_id):
-    profile = Profile.objects.get(id=user_id)
-    images = Image.objects.all().filter(user_id=user_id)
-    return render(request, 'all-temps/singleprofile.html', {'profile':profile, 'images':images})    
 
 
 def search_results(request):
@@ -63,9 +58,29 @@ def upload(request):
 
 
 
+
+
 @login_required(login_url='/accounts/login/')
-def profile(request):
+def single_profile(request):
     current_user = request.user
     title = 'Instagrum | Profile'
     profiles = Profile.objects.all()
-    return render(request,'all-temps/single_profile.html',{"title":title,"profiles":profiles,"user":current_user,})
+    images=Image.objects.filter_by(user=request.user)
+
+    return render(request,'all-temps/single_profile.html',{"title":title,"profiles":profiles,"user":current_user,"images":images})
+
+
+
+
+
+
+
+def user(request,user_id):
+    
+    try:
+        user=Profile.objects.get(id=user_id)
+    except DoesNotExist:
+        raise Http404()
+
+    return render(request,"all-temps/user.html",{"user":user})        
+        
