@@ -1,19 +1,22 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Image,Profile,Comment
 from django.contrib.auth.decorators import login_required
-from .forms import UploadForm
+from .forms import UploadForm,CommentForm
+from django.http import HttpResponse, Http404
+
 
 @login_required(login_url='/accounts/login/')
 def index(request):
     
     current_user=request.user
-    update= Image.objects.order_by('-postdate')
+    update= Image.objects.all()
     profile= Profile.objects.order_by('-update_time')
-    comments=Comment.objects.order_by('-timecomment')
+    comments = Comment.objects.all()
+   
     
     
 
-    return render(request,'all-temps/index.html',{"update":update,"profile":profile,"comments":comments})
+    return render(request,'all-temps/index.html',{"update":update,"profile":profile,"comments": comments})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -55,11 +58,6 @@ def upload(request):
             form = UploadForm()
     return render(request,'all-temps/upload.html',{"title":title, "user":current_user,"form":form})
 
-
-
-
-
-
 @login_required(login_url='/accounts/login/')
 def single_profile(request):
     current_user = request.user
@@ -68,12 +66,6 @@ def single_profile(request):
     images=Image.objects.filter_by(user=request.user)
 
     return render(request,'all-temps/single_profile.html',{"title":title,"profiles":profiles,"user":current_user,"images":images})
-
-
-
-
-
-
 
 def user(request,user_id):
     
@@ -84,3 +76,19 @@ def user(request,user_id):
 
     return render(request,"all-temps/user.html",{"user":user})        
         
+
+@login_required(login_url='/accounts/login/')
+def comment(request, id):
+    post = get_object_or_404(Image, id=id)
+    current_user = request.user
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.writer = current_user
+            comment.post = post
+            comment.save()
+            return redirect('index')
+    else:
+        form = CommentForm()
+    return render(request, 'all-temps/comments.html',{"form":form})

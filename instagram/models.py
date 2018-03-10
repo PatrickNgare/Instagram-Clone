@@ -14,10 +14,8 @@ class Profile(models.Model):
         self.save() 
         
     @classmethod
-    def get_profile(cls):
-        
+    def get_profile(cls): 
         profile=Profile.objects.all()
-
         return profile
     
     @classmethod
@@ -25,36 +23,16 @@ class Profile(models.Model):
         profile = cls.objects.filter(user__username__icontains=search_term)
         return profile    
 
-
-#comment model to store comments data 
-class Comment(models.Model):
-    
-    comment=models.TextField(max_length=300)
-    timecomment=models.DateTimeField(auto_now_add=True,null=True)
- 
-     
-
-    class Meta:
-        ordering=['comment']
-        
-               
-    
 #image models to store image data   
 class Image(models.Model):
-    image=models.ImageField(upload_to= 'gallery/',blank=True,null=True)
+    image=models.ImageField(upload_to='gallery/',blank=True,null=True)
     image_name=models.CharField(max_length=60)
     image_caption=models.CharField(max_length=200)
     profile=models.ForeignKey(Profile,null=True,blank=True)
     likes=models.IntegerField(default=0)
     postdate=models.DateTimeField(auto_now_add=True,null=True)
     user = models.ForeignKey(User, null=True)
-    comment=models.ForeignKey(Comment,null=True)
-    
-
-    
-    class Meta:
-        ordering=['image']
-
+  
     @classmethod
     def my_images(cls):
         
@@ -88,3 +66,13 @@ class Image(models.Model):
     def update_caption():   
        pass
 
+
+#comment model to store comments data 
+class Comment(models.Model):
+    comment=models.TextField(max_length=300)
+    timecomment=models.DateTimeField(auto_now_add=True,null=True)
+    writer = models.ForeignKey(User, on_delete=models.CASCADE,blank=True)
+    post = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments',blank=True)
+ 
+    class Meta:
+        ordering=['-timecomment']

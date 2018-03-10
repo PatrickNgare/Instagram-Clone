@@ -8,8 +8,9 @@ urlpatterns=[
     url(r'^$',views.index, name='index'),
     url(r'^profile/',views.profile, name='profile'),
     url(r'^search/', views.search_results, name='search_results'),
-    url(r'upload/',views.upload, name='upload'),
+    url(r'^upload/',views.upload, name='upload'),
     url(r'^single_profile/',views.single_profile, name='single_profile'),
+    url('^comments/(?P<id>\d+)',views.comment, name='comment'),
     url(r'^user/(\d+)',views.user, name='singleuser')
 
 ]

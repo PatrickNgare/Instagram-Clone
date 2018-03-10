@@ -3,11 +3,12 @@
 
 {% block content %}
 {{ block.super }}
-{% for up in update %}
 
-<div class="Instagram-card">
+<div class="Instagram-card">{% for up in update %}
     <div class="Instagram-card-header">
+      {% if up.image %}
       <img src="{{up.image.url}}"class="Instagram-card-user-image">
+      {% endif %}
       <a class="Instagram-card-user-name"  href="{% url 'singleuser' up.user.id%}">{{up.user}}</a>
      
     </div>
@@ -27,18 +28,24 @@
       <href="#">{{up.user}}</a>  {{up.image_caption}} 🎉</p>
       <p> {{up.postdate|timesince }} ago</p>
       <p class="comments">View 12 comments</p>
-
+      {% for comment in comments %}
+      
+        <p><strong>{{comment.writer}}</strong> {{comment.post}}</p>
+      
+        {%endfor%}
       <!-- <br><a class="user-comment" href="#">{{up.user.username}}</a> {{up.comment}} </br>
       <br><a class="user-comment" href="#">{{up.user.username}}</a> {{up.comment}}</br>
       
       <br><a class="user-comment" href="#">{{up.user.username}}</a> {{up.comment}}</br> -->
     <hr>
     
-    </div>  
-
+    </div> 
     <div class="Instagram-card-footer">
-      <a class="footer-action-icons"href="#"><i class="fa fa-heart-o"></i></a>
-      <div class="fb-comments" data-href="https://intapat.herokuapp.com/" data-numposts="7"></div>
+      <a class="footer-action-icons"href="#"><i class="fa fa-heart-o" ></i></a>
+      <a href="{% url 'comment'  id=up.pk %}"><i class="fa fa-comments-o" aria-hidden="true"></i>
+        
+     
+      <!-- <div class="fb-comments" data-href="https://intapat.herokuapp.com/" data-numposts="7"></div> -->
       
       
           
