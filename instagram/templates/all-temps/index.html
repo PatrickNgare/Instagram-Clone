@@ -4,16 +4,16 @@
 {% block content %}
 {{ block.super }}
 
-<div class="Instagram-card">{% for up in update %}
+<div class="Instagram-card">{% for up in update %} {%for pro in profile %}
     <div class="Instagram-card-header">
-      {% if up.image %}
-      <img src="{{up.image.url}}"class="Instagram-card-user-image">
+      {% if pro.profile_photo %}
+      <img src="{{pro.profile_photo.url}}"class="Instagram-card-user-image">
       {% endif %}
       <a class="Instagram-card-user-name"  href="{% url 'singleuser' up.user.id%}">{{up.user}}</a>
      
     </div>
     
-   
+  
     <div class="Instagram-card-image">
         {% if up.image %}
       <img src= "{{up.image.url}}" height="400px" width="600px"/>
@@ -52,6 +52,7 @@
         
       <a class="footer-action-icons"href="#"><i class="fa fa-ellipsis-h"></i></a>
     </div>
+    {%endfor%}
     {% endfor %}
     
   </div>
