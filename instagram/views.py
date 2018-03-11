@@ -3,6 +3,7 @@ from .models import Image,Profile,Comment
 from django.contrib.auth.decorators import login_required
 from .forms import UploadForm,CommentForm
 from django.http import HttpResponse, Http404
+from django.contrib import messages
 
 
 @login_required(login_url='/accounts/login/')
@@ -10,7 +11,7 @@ def index(request):
     
     current_user=request.user
     update= Image.objects.all()
-    profile= Profile.objects.order_by('-update_time')
+    profile= Profile.objects.all()
    
    
 
@@ -54,7 +55,10 @@ def upload(request):
             upload.user = current_user
             upload.profile = profile
             upload.save()
+            
             return redirect('index')
+            messages.success(request, 'Status  updated '\
+                                      'successfully')
         else:
             form = UploadForm()
     return render(request,'all-temps/upload.html',{"title":title, "user":current_user,"form":form})
