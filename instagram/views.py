@@ -11,12 +11,13 @@ def index(request):
     current_user=request.user
     update= Image.objects.all()
     profile= Profile.objects.order_by('-update_time')
-    comments = Comment.objects.all()
    
+   
+
     
     
 
-    return render(request,'all-temps/index.html',{"update":update,"profile":profile,"comments": comments})
+    return render(request,'all-temps/index.html',{"update":update,"profile":profile})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -58,23 +59,28 @@ def upload(request):
             form = UploadForm()
     return render(request,'all-temps/upload.html',{"title":title, "user":current_user,"form":form})
 
+
 @login_required(login_url='/accounts/login/')
 def single_profile(request):
     current_user = request.user
     title = 'Instagrum | Profile'
     profiles = Profile.objects.all()
-    images=Image.objects.filter_by(user=request.user)
+    images=Image.objects.filter(user=request.user)
 
     return render(request,'all-temps/single_profile.html',{"title":title,"profiles":profiles,"user":current_user,"images":images})
 
+
 def user(request,user_id):
+    current_user = request.user
     
     try:
         user=Profile.objects.get(id=user_id)
-    except DoesNotExist:
+        images=Image.objects.filter(user=request.user)
+        
+    except Image.DoesNotExist:
         raise Http404()
 
-    return render(request,"all-temps/user.html",{"user":user})        
+    return render(request,"all-temps/user.html",{"user":user,"images":images})        
         
 
 @login_required(login_url='/accounts/login/')

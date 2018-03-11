@@ -16,5 +16,15 @@
    <button type="button" class="btn btn-primary">Follow</button>
 
  </div>
+ <div class="col-sm-4">
+  {%for img in images%}
+  
+  <img class="img-fluid" src="{{img.image.url}}" alt="Card image cap">
+  <p>{{img.image_caption}}</p>
+ 
+  <span class="badge badge-success">{{img.likes}} likes </span>
+
+  {%endfor%}
+</div>
 
  {% endblock %}

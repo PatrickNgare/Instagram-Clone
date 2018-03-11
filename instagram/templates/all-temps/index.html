@@ -28,9 +28,9 @@
       <href="#">{{up.user}}</a>  {{up.image_caption}} 🎉</p>
       <p> {{up.postdate|timesince }} ago</p>
       <p class="comments">View 12 comments</p>
-      {% for comment in comments %}
+      {% for comment in up.comments.all%}
       
-        <p><strong>{{comment.writer}}</strong> {{comment.post}}</p>
+        <p><strong>{{comment.writer}}</strong> {{comment.comment}}</p>
       
         {%endfor%}
       <!-- <br><a class="user-comment" href="#">{{up.user.username}}</a> {{up.comment}} </br>

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.contrib.auth.models import UserManager
 
 #model profile to store user profile
 class Profile(models.Model):
@@ -32,6 +34,11 @@ class Image(models.Model):
     likes=models.IntegerField(default=0)
     postdate=models.DateTimeField(auto_now_add=True,null=True)
     user = models.ForeignKey(User, null=True)
+
+
+    class Meta:
+        ordering=['-postdate']
+
   
     @classmethod
     def my_images(cls):
@@ -76,3 +83,12 @@ class Comment(models.Model):
  
     class Meta:
         ordering=['-timecomment']
+
+
+def create_profile(sender, **kwargs):
+   if kwargs['created']:
+       profile = Profile.objects.create(user=kwargs['instance'])
+
+
+post_save.connect(create_profile, sender=User)
+
