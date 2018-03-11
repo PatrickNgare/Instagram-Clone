@@ -6,6 +6,7 @@
 
    <div class="row">
      
+     
     <div class="card" style="width:400px">
       <img class="card-img-top" src="{{user.profile_photo.url}}" alt="Card image">
       <div class="card-body">
@@ -15,18 +16,22 @@
       </div>
     </div>
 
- 
- 
-</div>
+  </div>
+  <div class="col-8">
+
 {%for img in images%} 
 
-<div class="col-4">
+
+
   <img class="img-fluid" src="{{img.image.url}}"  width="400px" alt="Card image cap">
    <p>{{img.image_caption}}</p> 
    <span class="badge badge-success">{{img.likes}} likes </span> 
   
-   </div>
-   {%endfor%}
+  
+
+</div>
+{%endfor%}
   </div>
+</div>
  {% endblock %}
  
