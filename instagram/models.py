@@ -10,6 +10,9 @@ class Profile(models.Model):
     user=models.ForeignKey(User)
     update_time = models.DateTimeField(auto_now_add=True, null=True)
 
+    class Meta:
+        ordering=['-update_time']
+
 
     def save_profile(self):
         
